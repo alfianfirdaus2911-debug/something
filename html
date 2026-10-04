@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Something</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --night: #050811;
+    --night-soft: #0a101c;
+    --wood: #b9a486;
+    --wood-dark: #ad9878;
+    --ink: #292724;
+    --white: #f4f4ef;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: var(--night);
+    color: var(--white);
+    font-family: "Inter", sans-serif;
+}
+
+
+/* =========================================================
+   STAR NIGHT BACKGROUND
+========================================================= */
+
+.scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(63,80,116,.24),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(43,57,90,.16),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #03060d,
+            #07101d 52%,
+            #04070e
+        );
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.85) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.55) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.30) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        170px 170px,
+        250px 250px,
+        330px 330px;
+
+    background-position:
+        20px 30px,
+        80px 120px,
+        150px 70px;
+
+    opacity: .48;
+
+    animation: starMove 35s linear infinite;
+}
+
+@keyframes starMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-60px);
+    }
+}
+
+.nebula {
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    left: 50%;
+    top: 40%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(92,113,163,.09),
+            rgba(58,76,118,.04) 30%,
+            transparent 70%
+        );
+
+    filter: blur(10px);
+}
+
+.moon {
+    position: absolute;
+
+    width: 82px;
+    height: 82px;
+
+    right: 8%;
+    top: 9%;
+
+    border-radius: 50%;
+
+    background: #e9e9df;
+
+    opacity: .72;
+
+    box-shadow:
+        0 0 40px rgba(255,255,230,.11);
+}
+
+.moon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 82px;
+    height: 82px;
+
+    left: 17px;
+    top: -6px;
+
+    border-radius: 50%;
+
+    background: #07101d;
+}
+
+
+/* =========================================================
+   SHOOTING STARS
+========================================================= */
+
+.shooting-stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shooting-star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    opacity: 0;
+
+    box-shadow:
+        0 0 5px rgba(255,255,255,.9),
+        0 0 12px rgba(255,255,255,.55);
+
+    transform: rotate(-42deg);
+}
+
+.shooting-star::after {
+    content: "";
+
+    position: absolute;
+
+    right: 1px;
+    top: 50%;
+
+    width: 125px;
+    height: 1px;
+
+    transform: translateY(-50%);
+
+    transform-origin: right center;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.05) 20%,
+            rgba(255,255,255,.25) 60%,
+            rgba(255,255,255,.8)
+        );
+
+    filter: blur(.4px);
+}
+
+.shooting-star::before {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    left: -2.5px;
+    top: -2.5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 6px rgba(255,255,255,1),
+        0 0 14px rgba(255,255,255,.75),
+        0 0 28px rgba(255,255,255,.35);
+}
+
+.star-a {
+    top: 18%;
+    left: 73%;
+
+    animation:
+        shootingStarOne 8s linear infinite;
+
+    animation-delay: 2s;
+}
+
+.star-b {
+    top: 34%;
+    left: 18%;
+
+    animation:
+        shootingStarTwo 11s linear infinite;
+
+    animation-delay: 5s;
+}
+
+.star-c {
+    top: 7%;
+    left: 45%;
+
+    animation:
+        shootingStarThree 14s linear infinite;
+
+    animation-delay: 8s;
+}
+
+@keyframes shootingStarOne {
+
+    0% {
+        opacity: 0;
+        transform: translate3d(0,0,0) rotate(-42deg);
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    17% {
+        opacity: .9;
+    }
+
+    25% {
+        opacity: 0;
+        transform: translate3d(-420px,300px,0) rotate(-42deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-420px,300px,0) rotate(-42deg);
+    }
+}
+
+@keyframes shootingStarTwo {
+
+    0% {
+        opacity: 0;
+        transform: translate3d(0,0,0) rotate(-42deg);
+    }
+
+    6% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    21% {
+        opacity: .8;
+    }
+
+    30% {
+        opacity: 0;
+        transform: translate3d(470px,340px,0) rotate(-42deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(470px,340px,0) rotate(-42deg);
+    }
+}
+
+@keyframes shootingStarThree {
+
+    0% {
+        opacity: 0;
+        transform: translate3d(0,0,0) rotate(-42deg);
+    }
+
+    8% {
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    23% {
+        opacity: .75;
+    }
+
+    31% {
+        opacity: 0;
+        transform: translate3d(-300px,420px,0) rotate(-42deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-300px,420px,0) rotate(-42deg);
+    }
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-content {
+    width: min(700px, 100%);
+    text-align: center;
+}
+
+.intro-small {
+    margin-bottom: 24px;
+
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+
+    color:
+        rgba(255,255,255,.43);
+}
+
+.intro h1 {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(48px,8vw,86px);
+
+    font-weight: 400;
+    line-height: .95;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 40px;
+}
+
+.choice {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.choice button {
+    min-width: 130px;
+    height: 48px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 3px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color: white;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.choice button:hover {
+    background:
+        rgba(255,255,255,.09);
+
+    border-color:
+        rgba(255,255,255,.35);
+
+    transform:
+        translateY(-2px);
+}
+
+#noBtn {
+    position: relative;
+}
+
+
+/* =========================================================
+   NAME SCREEN
+========================================================= */
+
+.name-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.name-screen.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.name-content {
+    width: min(500px, 100%);
+
+    text-align: center;
+}
+
+.name-small {
+    margin-bottom: 18px;
+
+    color:
+        rgba(255,255,255,.42);
+
+    font-size: 9px;
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.name-title {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(34px,7vw,52px);
+
+    font-weight: 400;
+    font-style: italic;
+
+    line-height: 1.05;
+
+    margin-bottom: 10px;
+}
+
+.name-subtitle {
+    color:
+        rgba(255,255,255,.52);
+
+    font-size: 11px;
+
+    letter-spacing: .4px;
+
+    margin-bottom: 28px;
+}
+
+.name-input-wrap {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.name-input {
+    width: min(330px, 90vw);
+    height: 52px;
+
+    padding: 0 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 4px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color: white;
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 23px;
+
+    transition: .25s ease;
+}
+
+.name-input::placeholder {
+    color:
+        rgba(255,255,255,.28);
+
+    font-style: italic;
+}
+
+.name-input:focus {
+    border-color:
+        rgba(255,255,255,.42);
+
+    background:
+        rgba(255,255,255,.065);
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.035);
+}
+
+.name-button {
+    margin-top: 15px;
+
+    width: min(330px, 90vw);
+    height: 45px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 3px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    color: white;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.name-button:hover {
+    background:
+        rgba(255,255,255,.10);
+
+    border-color:
+        rgba(255,255,255,.38);
+
+    transform:
+        translateY(-2px);
+}
+
+.name-error {
+    height: 18px;
+
+    margin-top: 10px;
+
+    color:
+        rgba(255,185,185,.75);
+
+    font-size: 9px;
+
+    letter-spacing: .5px;
+
+    opacity: 0;
+
+    transition: opacity .25s ease;
+}
+
+.name-error.show {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.envelope-screen.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.envelope-scene {
+    position: relative;
+
+    width: min(500px,78vw);
+
+    text-align: center;
+}
+
+.envelope-heading {
+    margin-bottom: 24px;
+
+    color:
+        rgba(255,255,255,.78);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(25px,5vw,36px);
+
+    font-weight: 400;
+
+    font-style: italic;
+
+    letter-spacing: 1px;
+}
+
+.envelope-heading::after {
+    content: "";
+
+    display: block;
+
+    width: 28px;
+    height: 1px;
+
+    margin: 11px auto 0;
+
+    background:
+        rgba(255,255,255,.32);
+}
+
+.envelope-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    cursor: pointer;
+
+    transition:
+        transform .5s ease;
+}
+
+.envelope-wrapper:hover {
+    transform:
+        translateY(-5px);
+}
+
+.envelope {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1.65;
+
+    overflow: hidden;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #59606a,
+            #464d57
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    box-shadow:
+        0 30px 65px rgba(0,0,0,.42),
+        0 7px 22px rgba(0,0,0,.25);
+
+    perspective: 900px;
+}
+
+.envelope::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            32deg,
+            transparent 49.65%,
+            rgba(255,255,255,.10) 50%,
+            transparent 50.35%
+        ),
+        linear-gradient(
+            -32deg,
+            transparent 49.65%,
+            rgba(255,255,255,.10) 50%,
+            transparent 50.35%
+        );
+}
+
+.envelope-top {
+    position: absolute;
+
+    z-index: 3;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 55%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #646b74,
+            #515861
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin:
+        top center;
+
+    transition:
+        transform 1s cubic-bezier(.77,0,.18,1);
+}
+
+.envelope.open .envelope-top {
+    transform:
+        rotateX(180deg);
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.wax-seal {
+    position: absolute;
+
+    z-index: 6;
+
+    left: 50%;
+    top: 53%;
+
+    width: 64px;
+    height: 64px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #a83d3d,
+            #7c2028 48%,
+            #58151c 100%
+        );
+
+    border:
+        2px solid
+        rgba(48,8,12,.45);
+
+    box-shadow:
+        0 7px 12px rgba(0,0,0,.32),
+        inset 4px 4px 7px rgba(255,255,255,.08),
+        inset -5px -6px 10px rgba(0,0,0,.28);
+
+    transition:
+        transform .65s ease,
+        opacity .55s ease,
+        filter .55s ease;
+}
+
+.wax-seal::before {
+    content: "✦";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -52%);
+
+    color:
+        rgba(255,226,194,.78);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 22px;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.4);
+}
+
+.wax-seal::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 7px;
+
+    border:
+        1px solid
+        rgba(255,215,190,.20);
+
+    border-radius: 50%;
+}
+
+.envelope.open .wax-seal {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.72)
+        rotate(-12deg);
+
+    filter:
+        blur(2px);
+}
+
+
+/* =========================================================
+   LITTLE CANDLE
+========================================================= */
+
+.candle {
+    position: absolute;
+
+    z-index: 7;
+
+    left: 50%;
+    top: -49px;
+
+    width: 18px;
+    height: 34px;
+
+    transform:
+        translateX(-50%);
+
+    pointer-events: none;
+}
+
+.candle-body {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 16px;
+    height: 25px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        3px 3px 5px 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d5c3a1,
+            #f0dfbb 48%,
+            #bca47f
+        );
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.3);
+}
+
+.candle-wick {
+    position: absolute;
+
+    left: 50%;
+    top: 4px;
+
+    width: 2px;
+    height: 7px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        #2c211b;
+
+    border-radius: 2px;
+}
+
+.flame {
+    position: absolute;
+
+    left: 50%;
+    top: -14px;
+
+    width: 12px;
+    height: 19px;
+
+    transform:
+        translateX(-50%)
+        rotate(2deg);
+
+    border-radius:
+        50% 50% 50% 50% /
+        65% 65% 35% 35%;
+
+    background:
+        radial-gradient(
+            circle at 50% 70%,
+            #fff6b0 0 22%,
+            #ffd15a 38%,
+            #ff8b28 68%,
+            rgba(255,104,30,0) 72%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(255,157,52,.8)
+        );
+
+    animation:
+        flameFlicker .16s ease-in-out infinite alternate;
+}
+
+.flame::after {
+    content: "";
+
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,148,45,.12);
+
+    filter: blur(5px);
+}
+
+@keyframes flameFlicker {
+
+    from {
+        transform:
+            translateX(-50%)
+            scale(1)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.08,.94)
+            rotate(4deg);
+    }
+}
+
+.envelope.open .candle {
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        translateY(-8px);
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+}
+
+
+/* =========================================================
+   OPEN HINT
+========================================================= */
+
+.open-hint {
+    margin-top: 19px;
+
+    color:
+        rgba(255,255,255,.37);
+
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    animation:
+        breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: .3;
+    }
+
+    50% {
+        opacity: .72;
+    }
+}
+
+
+/* =========================================================
+   LETTER SCREEN
+========================================================= */
+
+.letter-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+
+    padding: 35px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    overflow-y: auto;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(54,72,110,.12),
+            transparent 45%
+        ),
+        #050811;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.letter-screen.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   PAPER
+========================================================= */
+
+.paper {
+    position: relative;
+
+    width: min(850px,100%);
+
+    min-height: 100%;
+
+    padding:
+        85px
+        clamp(35px,8vw,100px)
+        85px;
+
+    background-image:
+
+        repeating-linear-gradient(
+            2deg,
+            rgba(70,55,38,.035) 0px,
+            rgba(70,55,38,.035) 1px,
+            transparent 1px,
+            transparent 7px
+        ),
+
+        repeating-linear-gradient(
+            88deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 11px
+        ),
+
+        linear-gradient(
+            135deg,
+            #bba98c 0%,
+            #b39f80 48%,
+            #aa9575 100%
+        );
+
+    color:
+        var(--ink);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.45),
+        inset 0 0 80px rgba(75,55,35,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    overflow: hidden;
+}
+
+.paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        1px solid
+        rgba(41,39,36,.23);
+
+    pointer-events: none;
+}
+
+.paper::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 28px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        rgba(41,39,36,.48);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PAPER CORNERS
+========================================================= */
+
+.corner {
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    border-color:
+        rgba(41,39,36,.27);
+
+    pointer-events: none;
+}
+
+.corner-tl {
+    top: 30px;
+    left: 30px;
+
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+
+.corner-tr {
+    top: 30px;
+    right: 30px;
+
+    border-top: 1px solid;
+    border-right: 1px solid;
+}
+
+.corner-bl {
+    bottom: 30px;
+    left: 30px;
+
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+}
+
+.corner-br {
+    bottom: 30px;
+    right: 30px;
+
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+
+/* =========================================================
+   CONSTELLATIONS
+========================================================= */
+
+.constellation {
+    position: absolute;
+
+    width: 130px;
+    height: 100px;
+
+    opacity: .17;
+
+    pointer-events: none;
+}
+
+.constellation span {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background:
+        var(--ink);
+
+    border-radius: 50%;
+}
+
+.constellation::before,
+.constellation::after {
+    content: "";
+
+    position: absolute;
+
+    height: 1px;
+
+    background:
+        var(--ink);
+
+    transform-origin:
+        left center;
+}
+
+.constellation-top {
+    top: 45px;
+    right: 70px;
+}
+
+.constellation-top span:nth-child(1) {
+    left: 10px;
+    top: 25px;
+}
+
+.constellation-top span:nth-child(2) {
+    left: 45px;
+    top: 8px;
+}
+
+.constellation-top span:nth-child(3) {
+    left: 77px;
+    top: 28px;
+}
+
+.constellation-top span:nth-child(4) {
+    left: 108px;
+    top: 13px;
+}
+
+.constellation-top::before {
+    width: 39px;
+
+    left: 14px;
+    top: 27px;
+
+    transform:
+        rotate(-26deg);
+}
+
+.constellation-top::after {
+    width: 38px;
+
+    left: 48px;
+    top: 11px;
+
+    transform:
+        rotate(31deg);
+}
+
+.constellation-bottom {
+    bottom: 48px;
+    left: 65px;
+
+    transform:
+        rotate(-12deg);
+}
+
+.constellation-bottom span:nth-child(1) {
+    left: 8px;
+    top: 30px;
+}
+
+.constellation-bottom span:nth-child(2) {
+    left: 40px;
+    top: 10px;
+}
+
+.constellation-bottom span:nth-child(3) {
+    left: 72px;
+    top: 32px;
+}
+
+.constellation-bottom span:nth-child(4) {
+    left: 108px;
+    top: 17px;
+}
+
+.constellation-bottom::before {
+    width: 37px;
+
+    left: 12px;
+    top: 28px;
+
+    transform:
+        rotate(-32deg);
+}
+
+.constellation-bottom::after {
+    width: 38px;
+
+    left: 44px;
+    top: 12px;
+
+    transform:
+        rotate(32deg);
+}
+
+
+/* =========================================================
+   SMALL PAPER STARS
+========================================================= */
+
+.star {
+    position: absolute;
+
+    color:
+        rgba(41,39,36,.28);
+
+    pointer-events: none;
+}
+
+.star-1 {
+    top: 145px;
+    left: 55px;
+
+    font-size: 12px;
+}
+
+.star-2 {
+    top: 205px;
+    right: 58px;
+
+    font-size: 9px;
+}
+
+.star-3 {
+    bottom: 170px;
+    right: 65px;
+
+    font-size: 13px;
+}
+
+.star-4 {
+    bottom: 225px;
+    left: 52px;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   PAPER HEADER
+========================================================= */
+
+.paper-header {
+    position: relative;
+
+    text-align: center;
+
+    margin-bottom: 52px;
+}
+
+.paper-title {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(42px,6vw,58px);
+
+    font-weight: 600;
+
+    font-style: italic;
+
+    letter-spacing: 3px;
+
+    color:
+        var(--ink);
+}
+
+.title-decoration {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 10px;
+}
+
+.title-decoration span {
+    width: 55px;
+    height: 1px;
+
+    background:
+        var(--ink);
+
+    opacity: .25;
+}
+
+.title-decoration i {
+    font-size: 9px;
+
+    font-style: normal;
+
+    opacity: .5;
+}
+
+.paper-date {
+    margin-top: 8px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color:
+        var(--ink);
+
+    opacity: .58;
+}
+
+
+/* =========================================================
+   LETTER CONTENT
+========================================================= */
+
+.letter-content {
+    position: relative;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    font-style: italic;
+
+    line-height: 1.85;
+
+    letter-spacing: .05px;
+
+    color:
+        var(--ink);
+}
+
+.letter-content p {
+    margin-bottom: 26px;
+
+    color:
+        var(--ink);
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.letter-divider {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin:
+        8px 0 30px;
+
+    opacity: .42;
+}
+
+.letter-divider span {
+    width: 32px;
+    height: 1px;
+
+    background:
+        var(--ink);
+}
+
+.letter-divider i {
+    font-style: normal;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.signature {
+    margin-top: 52px;
+
+    text-align: right;
+
+    color:
+        var(--ink);
+}
+
+.signature-small {
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color:
+        var(--ink);
+
+    opacity: .55;
+
+    margin-bottom: 5px;
+}
+
+.signature-name {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 29px;
+
+    font-weight: 600;
+
+    font-style: italic;
+
+    color:
+        var(--ink);
+}
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-button {
+    position: fixed;
+
+    z-index: 50;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 50%;
+
+    background:
+        rgba(5,9,20,.65);
+
+    backdrop-filter:
+        blur(12px);
+
+    color: white;
+
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        .3s ease;
+}
+
+.music-button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.music-button:hover {
+    transform:
+        scale(1.06);
+
+    border-color:
+        rgba(255,255,255,.38);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:600px) {
+
+    .moon {
+        width: 65px;
+        height: 65px;
+
+        right: 7%;
+        top: 8%;
+    }
+
+    .moon::after {
+        width: 65px;
+        height: 65px;
+
+        left: 13px;
+        top: -5px;
+    }
+
+    .shooting-star::after {
+        width: 90px;
+    }
+
+    .star-a {
+        top: 20%;
+        left: 78%;
+    }
+
+    .star-b {
+        top: 38%;
+        left: 12%;
+    }
+
+    .star-c {
+        top: 10%;
+        left: 52%;
+    }
+
+    .intro {
+        padding: 25px;
+    }
+
+    .intro h1 {
+        font-size: 55px;
+    }
+
+    .choice button {
+        min-width: 115px;
+    }
+
+    .name-title {
+        font-size: 38px;
+    }
+
+    .name-subtitle {
+        font-size: 10px;
+    }
+
+    .name-input {
+        height: 50px;
+    }
+
+    .envelope-scene {
+        width: 80vw;
+    }
+
+    .envelope-heading {
+        font-size: 26px;
+        margin-bottom: 21px;
+    }
+
+    .wax-seal {
+        width: 52px;
+        height: 52px;
+    }
+
+    .wax-seal::before {
+        font-size: 18px;
+    }
+
+    .candle {
+        top: -43px;
+
+        transform:
+            translateX(-50%)
+            scale(.85);
+    }
+
+    .letter-screen {
+        padding: 18px 11px;
+    }
+
+    .paper {
+        min-height:
+            calc(100vh - 36px);
+
+        padding:
+            65px 26px 70px;
+    }
+
+    .paper::before {
+        inset: 10px;
+    }
+
+    .paper::after {
+        top: 23px;
+    }
+
+    .corner {
+        width: 30px;
+        height: 30px;
+    }
+
+    .corner-tl {
+        top: 22px;
+        left: 22px;
+    }
+
+    .corner-tr {
+        top: 22px;
+        right: 22px;
+    }
+
+    .corner-bl {
+        bottom: 22px;
+        left: 22px;
+    }
+
+    .corner-br {
+        bottom: 22px;
+        right: 22px;
+    }
+
+    .paper-title {
+        font-size: 40px;
+        letter-spacing: 3px;
+    }
+
+    .paper-header {
+        margin-bottom: 39px;
+    }
+
+    .title-decoration span {
+        width: 35px;
+    }
+
+    .letter-content {
+        font-size: 18px;
+        line-height: 1.82;
+    }
+
+    .letter-content p {
+        margin-bottom: 22px;
+    }
+
+    .signature {
+        margin-top: 42px;
+    }
+
+    .signature-name {
+        font-size: 25px;
+    }
+
+    .constellation-top {
+        right: 35px;
+        top: 35px;
+
+        transform:
+            scale(.7);
+    }
+
+    .constellation-bottom {
+        left: 25px;
+        bottom: 35px;
+
+        transform:
+            scale(.7)
+            rotate(-12deg);
+    }
+
+    .star-1 {
+        left: 32px;
+        top: 130px;
+    }
+
+    .star-2 {
+        right: 30px;
+        top: 185px;
+    }
+
+    .star-3 {
+        right: 32px;
+        bottom: 150px;
+    }
+
+    .star-4 {
+        left: 30px;
+        bottom: 195px;
+    }
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.letter-screen::-webkit-scrollbar {
+    width: 7px;
+}
+
+.letter-screen::-webkit-scrollbar-track {
+    background:
+        rgba(255,255,255,.03);
+}
+
+.letter-screen::-webkit-scrollbar-thumb {
+    background:
+        rgba(255,255,255,.18);
+
+    border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
+
+<div class="scene">
+
+    <div class="stars"></div>
+
+    <div class="nebula"></div>
+
+    <div class="moon"></div>
+
+    <div class="shooting-stars">
+
+        <span class="shooting-star star-a"></span>
+
+        <span class="shooting-star star-b"></span>
+
+        <span class="shooting-star star-c"></span>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     INTRO
+======================================================= -->
+
+<section class="intro" id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            A little something
+        </div>
+
+        <h1>
+            Ada sesuatu<br>
+            buat kamu.
+        </h1>
+
+        <div class="choice">
+
+            <button id="yesBtn">
+                BUKA
+            </button>
+
+            <button id="noBtn">
+                NANTI
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     NAME SCREEN
+======================================================= -->
+
+<section
+    class="name-screen"
+    id="nameScreen"
+>
+
+    <div class="name-content">
+
+        <div class="name-small">
+            one little thing first
+        </div>
+
+        <div class="name-title">
+            eitss sebelum masuk...
+        </div>
+
+        <div class="name-subtitle">
+            isi nama dulu dongg,<br>
+            siapa nama kamu? 😁
+        </div>
+
+        <div class="name-input-wrap">
+
+            <input
+                type="text"
+                id="nameInput"
+                class="name-input"
+                placeholder="ketik nama kamu..."
+                autocomplete="off"
+                maxlength="40"
+            >
+
+            <button
+                class="name-button"
+                id="nameButton"
+            >
+                MASUK ✦
+            </button>
+
+            <div
+                class="name-error"
+                id="nameError"
+            >
+                namanya diisi dulu dongg 😭
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     ENVELOPE
+======================================================= -->
+
+<section
+    class="envelope-screen"
+    id="envelopeScreen"
+>
+
+    <div class="envelope-scene">
+
+        <div class="envelope-heading">
+            yeayyy dibuka 😁
+        </div>
+
+
+        <div
+            class="envelope-wrapper"
+            id="envelopeWrapper"
+        >
+
+            <div
+                class="envelope"
+                id="envelope"
+            >
+
+                <div class="candle">
+
+                    <div class="candle-body"></div>
+
+                    <div class="candle-wick"></div>
+
+                    <div class="flame"></div>
+
+                </div>
+
+
+                <div class="wax-seal"></div>
+
+
+                <div class="envelope-top"></div>
+
+            </div>
+
+            <div class="open-hint">
+                klik untuk membuka
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     LETTER
+======================================================= -->
+
+<section
+    class="letter-screen"
+    id="letterScreen"
+>
+
+    <article class="paper">
+
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+
+        <div class="constellation constellation-top">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+
+        <div class="constellation constellation-bottom">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+
+        <div class="star star-1">
+            ✦
+        </div>
+
+        <div class="star star-2">
+            ✧
+        </div>
+
+        <div class="star star-3">
+            ✦
+        </div>
+
+        <div class="star star-4">
+            ·
+        </div>
+
+
+        <header class="paper-header">
+
+            <h2
+                class="paper-title"
+                id="paperTitle"
+            >
+                Untuk Kamu
+            </h2>
+
+            <div class="title-decoration">
+
+                <span></span>
+
+                <i>✦</i>
+
+                <span></span>
+
+            </div>
+
+            <div class="paper-date">
+                A little reminder
+            </div>
+
+        </header>
+
+
+        <div class="letter-content">
+
+            <p>
+                Kamu tahu <span class="name-placeholder">kamu</span>, ada jutaan bintang yang menerangi diatas angkasa, digalaksi bima sakti maupun di kukubima wkwkk. ✨ Cahaya yang lihat saat malam ini, ada yang menempuh ratusan bahkan jutaan tahun lalu, sebelum kita lahir dan pada akhir nya sampai pandangan kita. Dan ga sedikit juga bintang itu ada yang sudah hilang dan padam tapi cahaya nya tetap menyinari kita sampai saat ini. 🌌
+            </p>
+
+
+            <div class="letter-divider">
+
+                <span></span>
+
+                <i>✦</i>
+
+                <span></span>
+
+            </div>
+
+
+            <p>
+                Itulah yang aku pelajari, hal yang berharga tak pernah sampai dengan instan. Ada proses, ada perjalanan, ada yang waktu juga yang ditempuh.
+            </p>
+
+
+            <p>
+                Dan <span class="name-placeholder">kamu</span>, kamu sedang menempuh perjalanan itu juga. Setiap lelah yang kamu rasakan, kamu gapapa kok ngeluh capek dll itu bentuk alami manusia yaa, tapi kamu harus inget setiap perjalanan yang terasa berat itu sama seperti cahaya yang sedang menyebrangi gelap nya angkasa 😉.
+            </p>
+
+
+            <div class="letter-divider">
+
+                <span></span>
+
+                <i>✦</i>
+
+                <span></span>
+
+            </div>
+
+
+            <p>
+                Oiyaa bintang juga gapernah berenti memancar meski jarak nya jauh. Dan kamu juga begitu <span class="name-placeholder">kamu</span>, semua yang kamu usahakan, semua yang kamu bangun, pelan² tapi pasti cahaya mu itu sedang berjalan. ⭐
+            </p>
+
+
+            <p>
+                Nanti tiba saat waktu nya semua itu sampai dan menyinari tempat yang tepat yaa. 😎
+            </p>
+
+
+            <div class="signature">
+
+                <div class="signature-small">
+                    From your biggest fan deymmm
+                </div>
+
+                <div class="signature-name">
+                    Kevin
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+</section>
+
+
+<!-- =======================================================
+     MUSIC
+======================================================= -->
+
+<button
+    class="music-button"
+    id="musicButton"
+    title="Music"
+>
+    ♪
+</button>
+
+
+<audio
+    id="music"
+    loop
+    preload="auto"
+>
+
+    <source
+        src="./song.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<script>
+
+/* =========================================================
+   ELEMENT
+========================================================= */
+
+const intro =
+    document.getElementById("intro");
+
+const nameScreen =
+    document.getElementById("nameScreen");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const nameButton =
+    document.getElementById("nameButton");
+
+const nameError =
+    document.getElementById("nameError");
+
+const envelopeScreen =
+    document.getElementById("envelopeScreen");
+
+const envelopeWrapper =
+    document.getElementById("envelopeWrapper");
+
+const envelope =
+    document.getElementById("envelope");
+
+const letterScreen =
+    document.getElementById("letterScreen");
+
+const paperTitle =
+    document.getElementById("paperTitle");
+
+const namePlaceholders =
+    document.querySelectorAll(".name-placeholder");
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+const noBtn =
+    document.getElementById("noBtn");
+
+const music =
+    document.getElementById("music");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+
+/* =========================================================
+   NAMA PENGUNJUNG
+========================================================= */
+
+let visitorName = "";
+
+
+/* =========================================================
+   BUKA → NAMA
+========================================================= */
+
+yesBtn.addEventListener(
+    "click",
+    () => {
+
+        intro.classList.add("hide");
+
+        setTimeout(
+            () => {
+
+                nameScreen.classList.add("show");
+
+                setTimeout(
+                    () => {
+
+                        nameInput.focus();
+
+                    },
+                    400
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MASUK SETELAH ISI NAMA
+========================================================= */
+
+function enterWithName() {
+
+    const typedName =
+        nameInput.value.trim();
+
+
+    if (!typedName) {
+
+        nameError.classList.add("show");
+
+        nameInput.focus();
+
+        return;
+
+    }
+
+
+    nameError.classList.remove("show");
+
+
+    visitorName =
+        typedName;
+
+
+    paperTitle.textContent =
+        "Untuk " + visitorName;
+
+
+    namePlaceholders.forEach(
+        element => {
+
+            element.textContent =
+                visitorName;
+
+        }
+    );
+
+
+    /*
+     * Hilangkan layar nama.
+     */
+
+    nameScreen.classList.remove("show");
+
+    /*
+     * Pastikan layar nama benar-benar
+     * tidak menangkap klik.
+     */
+
+    nameScreen.style.pointerEvents =
+        "none";
+
+
+    /*
+     * Tampilkan amplop.
+     */
+
+    setTimeout(
+        () => {
+
+            envelopeScreen.classList.add("show");
+
+        },
+        700
+    );
+
+}
+
+
+nameButton.addEventListener(
+    "click",
+    enterWithName
+);
+
+
+nameInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Enter") {
+
+            enterWithName();
+
+        }
+
+    }
+);
+
+
+nameInput.addEventListener(
+    "input",
+    () => {
+
+        if (nameInput.value.trim()) {
+
+            nameError.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   NANTI — KABUR
+========================================================= */
+
+function moveNoButton() {
+
+    const padding = 20;
+
+    const maxX =
+        window.innerWidth -
+        noBtn.offsetWidth -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        noBtn.offsetHeight -
+        padding;
+
+    const x =
+        Math.random() *
+        Math.max(maxX, padding);
+
+    const y =
+        Math.random() *
+        Math.max(maxY, padding);
+
+    noBtn.style.position =
+        "fixed";
+
+    noBtn.style.left =
+        x + "px";
+
+    noBtn.style.top =
+        y + "px";
+}
+
+
+noBtn.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+noBtn.addEventListener(
+    "touchstart",
+    e => {
+
+        e.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+noBtn.addEventListener(
+    "click",
+    e => {
+
+        e.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* =========================================================
+   AMPLOP — FIXED
+========================================================= */
+
+let envelopeOpened = false;
+
+let musicPlaying = false;
+
+
+envelopeWrapper.addEventListener(
+    "click",
+    () => {
+
+        /*
+         * Mencegah amplop diklik berkali-kali.
+         */
+
+        if (envelopeOpened) return;
+
+        envelopeOpened = true;
+
+
+        /*
+         * Animasi buka amplop.
+         */
+
+        envelope.classList.add("open");
+
+
+        /* =================================================
+           MUSIK
+           
+           Musik TIDAK di-await.
+           Jadi kalau song.mp3 error,
+           surat tetap akan terbuka.
+        ================================================= */
+
+        const playPromise =
+            music.play();
+
+
+        if (playPromise !== undefined) {
+
+            playPromise
+                .then(
+                    () => {
+
+                        musicPlaying = true;
+
+                        musicButton.textContent =
+                            "Ⅱ";
+
+                    }
+                )
+                .catch(
+                    error => {
+
+                        musicPlaying = false;
+
+                        musicButton.textContent =
+                            "♪";
+
+                        console.warn(
+                            "Musik gagal diputar. Surat tetap dibuka.",
+                            error
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /*
+         * Tombol musik ditampilkan.
+         */
+
+        musicButton.classList.add("show");
+
+
+        /* =================================================
+           PINDAH KE SURAT
+        ================================================= */
+
+        setTimeout(
+            () => {
+
+                /*
+                 * Hilangkan amplop.
+                 */
+
+                envelopeScreen.classList.remove("show");
+
+
+                /*
+                 * Setelah transisi,
+                 * tampilkan surat.
+                 */
+
+                setTimeout(
+                    () => {
+
+                        letterScreen.classList.add("show");
+
+                    },
+                    500
+                );
+
+            },
+            1100
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+musicButton.addEventListener(
+    "click",
+    async e => {
+
+        /*
+         * Supaya klik tombol musik
+         * tidak dianggap klik amplop.
+         */
+
+        e.stopPropagation();
+
+
+        if (musicPlaying) {
+
+            music.pause();
+
+            musicPlaying = false;
+
+            musicButton.textContent =
+                "♪";
+
+        } else {
+
+            try {
+
+                await music.play();
+
+                musicPlaying = true;
+
+                musicButton.textContent =
+                    "Ⅱ";
+
+            } catch (error) {
+
+                musicPlaying = false;
+
+                musicButton.textContent =
+                    "♪";
+
+                console.warn(
+                    "Musik tidak dapat diputar:",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CEK ERROR AUDIO
+========================================================= */
+
+music.addEventListener(
+    "error",
+    () => {
+
+        console.warn(
+            "File song.mp3 tidak ditemukan atau format tidak didukung:",
+            music.currentSrc
+        );
+
+    }
+);
+
+
+/* =========================================================
+   PARALLAX
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    e => {
+
+        const x =
+            (
+                e.clientX /
+                window.innerWidth -
+                .5
+            ) * 8;
+
+        const y =
+            (
+                e.clientY /
+                window.innerHeight -
+                .5
+            ) * 8;
+
+
+        const nebula =
+            document.querySelector(".nebula");
+
+
+        if (nebula) {
+
+            nebula.style.transform =
+                `translate(
+                    calc(-50% + ${x}px),
+                    calc(-50% + ${y}px)
+                )`;
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
